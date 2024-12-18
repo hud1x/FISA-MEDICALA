@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fisa Medicală - Formular</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> 
+    <style>
+       
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            height: 100vh;
+            padding: 20px;
+            background-image: url('https://t4.ftcdn.net/jpg/04/04/40/49/360_F_404404954_WGYZtTwswIrXnJl6qVeEFK5UWPFflVB8.jpg'); 
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            width: 100%;
+            max-width: 950px;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .container img {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 120px;
+            height: auto;
+        }
+
+        .container h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            text-decoration: underline;
+        }
+
+        label {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 8px;
+            color: #34495e;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        textarea {
+            height: 80px;
+        }
+
+        button {
+            padding: 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="https://cdn.discordapp.com/attachments/1132264273809244160/1319018600987889745/smurd-serviciul-mobil-de-urgenta-reanimare-si-descarcerare-sigla-Photoroom.png?ex=67646f4c&is=67631dcc&hm=2470d17cf9a63cd561d984352b12cba04e3a93babbd3e617bf4674474d042f3f&"> 
+        <h1>Fisa Medicală</h1>
+
+        <form id="medicalForm">
+            
+            <div class="form-section">
+                <h2>Detalii Pacient</h2>
+                <div class="form-grid">
+                    <div>
+                        <label for="nume">Nume complet:</label>
+                        <input type="text" id="nume" name="nume" required>
+                    </div>
+                    <div>
+                        <label for="cnp">CNP:</label>
+                        <input type="text" id="cnp" name="cnp" required>
+                    </div>
+                    <div>
+                        <label for="sex">Sex:</label>
+                        <select id="sex" name="sex" required>
+                            <option value="Masculin">Masculin</option>
+                            <option value="Feminin">Feminin</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="data_nasterii">Data nașterii:</label>
+                        <input type="date" id="data_nasterii" name="data_nasterii" required>
+                    </div>
+                    <div>
+                        <label for="adresa">Adresă de domiciliu:</label>
+                        <input type="text" id="adresa" name="adresa" required>
+                    </div>
+                    <div>
+                        <label for="ocupatie">Ocupație:</label>
+                        <input type="text" id="ocupatie" name="ocupatie" required>
+                    </div>
+                    <div>
+                        <label for="telefon">Număr de telefon:</label>
+                        <input type="tel" id="telefon" name="telefon" required>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="form-section">
+                <h2>Detalii Medic</h2>
+                <div class="form-grid">
+                    <div>
+                        <label for="nume_medic">Nume complet medic:</label>
+                        <input type="text" id="nume_medic" name="nume_medic" required>
+                    </div>
+                    <div>
+                        <label for="specializare">Specializare:</label>
+                        <input type="text" id="specializare" name="specializare" required>
+                    </div>
+                    <div>
+                        <label for="nr_inregistrare">Număr de înregistrare:</label>
+                        <input type="text" id="nr_inregistrare" name="nr_inregistrare" required>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="form-section">
+                <h2>Anamneză și Istoric Medical</h2>
+                <div class="form-grid">
+                    <div>
+                        <label for="anamneza">Anamneză:</label>
+                        <textarea id="anamneza" name="anamneza" required></textarea>
+                    </div>
+                    <div>
+                        <label for="afectiuni">Afectiuni existente:</label>
+                        <textarea id="afectiuni" name="afectiuni" required></textarea>
+                    </div>
+                    <div>
+                        <label for="alergii">Alergii:</label>
+                        <textarea id="alergii" name="alergii" required></textarea>
+                    </div>
+                    <div>
+                        <label for="istoric_familial">Istoric familial de boli:</label>
+                        <textarea id="istoric_familial" name="istoric_familial" required></textarea>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="form-section">
+                <h2>Consultație și Plan de Tratament</h2>
+                <div class="form-grid">
+                    <div>
+                        <label for="motiv_consultatie">Motivul Consultației:</label>
+                        <textarea id="motiv_consultatie" name="motiv_consultatie" required></textarea>
+                    </div>
+                    <div>
+                        <label for="examinare_fizica">Examinare fizică:</label>
+                        <textarea id="examinare_fizica" name="examinare_fizica" required></textarea>
+                    </div>
+                    <div>
+                        <label for="investigatii">Investigații și Analize Efectuate:</label>
+                        <textarea id="investigatii" name="investigatii" required></textarea>
+                    </div>
+                    <div>
+                        <label for="recomandari">Recomandări și Plan de Tratament:</label>
+                        <textarea id="recomandari" name="recomandari" required></textarea>
+                    </div>
+                    <div>
+                        <label for="diagnostic">Diagnostic Final:</label>
+                        <textarea id="diagnostic" name="diagnostic" required></textarea>
+                    </div>
+                    <div>
+                        <label for="cost_servicii">Cost Servicii Medicale:</label>
+                        <input type="text" id="cost_servicii" name="cost_servicii" required>
+                    </div>
+                    <div>
+                        <label for="urmatoarea_consultatie">Următoarea Consultație sau Urmărire:</label>
+                        <input type="text" id="urmatoarea_consultatie" name="urmatoarea_consultatie" required>
+                    </div>
+                </div>
+            </div>
+
+            
+            <button type="button" id="generatePDF">Generează Fisa Medicală</button>
+        </form>
+    </div>
+
+    <script>
+        const { jsPDF } = window.jspdf;
+
+        document.getElementById('generatePDF').addEventListener('click', function () {
+            const doc = new jsPDF();
+
+            
+            doc.addImage('https://cdn.discordapp.com/attachments/1132264273809244160/1319008081828515971/smurd-serviciul-mobil-de-urgenta-reanimare-si-descarcerare-sigla.jpg?ex=67646580&is=67631400&hm=ddeee03f327d4d09c4cd470412b2ff1f0dfdd5ef45200fadfea3c07a43e57770&', 'JPEG', 160, 10, 40, 40); 
+
+            doc.setFontSize(14);
+            doc.text("Fisa Medicală", 20, 20);
+
+            
+            doc.text("Detalii Pacient:", 20, 30);
+            doc.text("Nume complet: " + document.getElementById('nume').value, 20, 40);
+            doc.text("CNP: " + document.getElementById('cnp').value, 20, 50);
+            doc.text("Sex: " + document.getElementById('sex').value, 20, 60);
+            doc.text("Data nașterii: " + document.getElementById('data_nasterii').value, 20, 70);
+            doc.text("Adresă de domiciliu: " + document.getElementById('adresa').value, 20, 80);
+            doc.text("Ocupație: " + document.getElementById('ocupatie').value, 20, 90);
+            doc.text("Număr de telefon: " + document.getElementById('telefon').value, 20, 100);
+
+            
+            doc.text("Detalii Medic:", 20, 110);
+            doc.text("Nume complet medic: " + document.getElementById('nume_medic').value, 20, 120);
+            doc.text("Specializare: " + document.getElementById('specializare').value, 20, 130);
+            doc.text("Număr de înregistrare: " + document.getElementById('nr_inregistrare').value, 20, 140);
+
+            
+            doc.text("Anamneză: " + document.getElementById('anamneza').value, 20, 150);
+            doc.text("Afectiuni existente: " + document.getElementById('afectiuni').value, 20, 160);
+            doc.text("Alergii: " + document.getElementById('alergii').value, 20, 170);
+
+            
+            doc.text("Motivul Consultației: " + document.getElementById('motiv_consultatie').value, 20, 180);
+            doc.text("Examinare fizică: " + document.getElementById('examinare_fizica').value, 20, 190);
+            doc.text("Investigații și Analize Efectuate: " + document.getElementById('investigatii').value, 20, 200);
+            doc.text("Recomandări și Plan de Tratament: " + document.getElementById('recomandari').value, 20, 210);
+            doc.text("Diagnostic Final: " + document.getElementById('diagnostic').value, 20, 220);
+            doc.text("Cost Servicii Medicale: " + document.getElementById('cost_servicii').value, 20, 230);
+            doc.text("Următoarea Consultație: " + document.getElementById('urmatoarea_consultatie').value, 20, 240);
+
+        
+            doc.save("Fisa_Medicala.pdf");
+        });
+    </script>
+</body>
+</html>
